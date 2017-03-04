@@ -79,8 +79,8 @@ app.get('/:serverIds/:module', function(req, res) {
             ret.push( ret_ );
             cb();
         });
-    }, ()=>{
-        ret = ret.sort( (a,b)=>( (a.index < b.index)? (-1): (a.index==b.index? 0: 1) ) );
+    }, function(){
+        ret = ret.sort( function(a,b)( (a.index < b.index)? (-1): (a.index==b.index? 0: 1) ) );
         res.json(ret);
     });
 
