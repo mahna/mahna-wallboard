@@ -1,0 +1,179 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "کاربران صف",
+			"width": 1,
+			"row": {
+				"1": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"1": 1,
+				"3": 3,
+				"4": 3,
+				"5": 3
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "var qs = datasources[\"queues\"];\n\nfunction getData(data){\n    var t,t1,t2,t3,t4;\n    var i,j;\n    var body = $('<tbody>').css({\n        background: data.color  \n    });\n    if( data.error == true ){\n        t1 = $('<tr>').appendTo(body);\n        $('<td>').css({\n            padding: '8px 10px',\n            color: '#EEE',\n            fontWeight: 'bold',\n            textAlign: 'right'\n        }).html(data.displayName).appendTo(t1);\n        \n        $('<td>').css({textAlign: 'right'}).html('اشکال در سرور!').appendTo(t1);\n    }\n    else{\n        for( i = 0; i < data.response.length; i++ ){\n            t1 = $('<tr>').appendTo(body);\n            $('<td>').css({\n                padding: '8px 10px',\n                color: '#EEE',\n                fontWeight: 'bold',\n                textAlign: 'right'\n            }).html(data.displayName + ': ' + data.response[i].number ).appendTo(t1);\n            \n            t2 = $('<td>').css({textAlign:'right'}).appendTo(t1);\n            t3 = [];\n            for( j = 0; j < data.response[i].members.length; j++ ){\n                if( t3.indexOf(data.response[i].members[j]) !== -1 ) continue;\n                t3.push( data.response[i].members[j] );\n                $('<span>').css({\n                    margin: '1px 4px',\n                    padding: '1px 3px',\n                    background: 'rgba(255,255,255,.5)',\n                    color: '#333',\n                    borderRadius: '9px',\n                    fontSize: '11pt'\n                }).html(data.response[i].members[j]).appendTo(t2);\n            }\n            if( j == 0 ){\n                t2.html('بدون کاربر!')\n            }\n        }\n    }\n    return body[0].outerHTML;\n}\n\n\nvar i,j;\nvar t,t1,t2;\nvar ret = $('<div>').addClass('widget');\nt = $('<div>').addClass('sub-section').appendTo(ret);\n\nt1 = $('<table>').css({\n    width: '100%',\n    textAlign: 'center',\n    direction: 'rtl'\n}).appendTo(t);\nt2 = $('<tr>').css({\n    color: '#EEE',\n    borderBottom: 'solid 2px #999',\n    fontWeight: 'bold'\n}).appendTo(t1);\n\n$('<td>').css({\n    padding:'10px',\n    width: '40%',\n    textAlign: 'right'\n}).html('سرور').appendTo(t2);\n    \n$('<td>').html('اعضا').css({width:'60%'}).appendTo(t2);\n\n\nfor( i = 0; i < qs.length; i++ ){\n    //$('<div>').text( qs[i].id ).addClass('section-title').appendTo(t);\n    t1.append( getData(qs[i]) )\n}\n\nreturn ret[0].outerHTML;\n",
+						"height": 11
+					}
+				}
+			]
+		},
+		{
+			"title": "E1",
+			"width": 1,
+			"row": {
+				"1": 59,
+				"3": 11,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"1": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col_width": "2",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "var qs = datasources[\"e1\"];\n\nfunction getData(data){\n    var t,t1,t2,t3,t4;\n    var i,j;\n    var body = $('<tbody>').css({\n        background: data.color  \n    });\n    if( data.error == true || typeof data.response == 'string' ){\n        t1 = $('<tr>').appendTo(body);\n        $('<td>').css({\n            padding: '8px 10px',\n            color: '#EEE',\n            fontWeight: 'bold',\n            textAlign: 'right'\n        }).html(data.displayName).appendTo(t1);\n        \n        $('<td>').css({textAlign: 'right'}).html('اشکال در سرور!').appendTo(t1);\n    }\n    else{\n        for( i = 0; i < data.response.length; i++ ){\n            t1 = $('<tr>').appendTo(body);\n            $('<td>').css({\n                padding: '8px 10px',\n                color: '#EEE',\n                fontWeight: 'bold',\n                textAlign: 'right'\n            }).html(data.displayName + ': ' + data.response[i].name ).appendTo(t1);\n            \n            t2 = $('<td>').css({textAlign:'right'}).appendTo(t1);\n            for( j = 0; j < data.response[i].details.length; j++ ){\n                $('<span>').css({\n                    margin: '1px 4px',\n                    padding: '3px 5px',\n                    background: (data.response[i].details[j].status == 3 ? '#14EA0B': '#F33636'),\n                    boxShadow: '0 0 30px '+ (data.response[i].details[j].status == 3 ? '#14EA0B': '#F33636'),\n                    color: (data.response[i].details[j].status == 3 ? '#000': '#FFF'),\n                    borderRadius: '9px',\n                    fontSize: '11pt',\n                    fontFamily: 'sans-serif'\n                }).html(data.response[i].details[j].name + ':' + data.response[i].details[j].port ).appendTo(t2);\n            }\n            if( j == 0 ){\n                t2.html('')\n            }\n        }\n        if( i == 0 ){\n            t1 = $('<tr>').appendTo(body);\n            $('<td>').css({\n                padding: '8px 10px',\n                color: '#EEE',\n                fontWeight: 'bold',\n                textAlign: 'right'\n            }).html(data.displayName ).appendTo(t1);\n            $('<td>').css({textAlign:'right'}).html('هیچ موردی موجود نیست!').appendTo(t1);\n        }\n    }\n    return body[0].outerHTML;\n}\n\n\nvar i,j;\nvar t,t1,t2;\nvar ret = $('<div>').addClass('widget');\nt = $('<div>').addClass('sub-section').appendTo(ret);\n\nt1 = $('<table>').css({\n    width: '100%',\n    textAlign: 'center',\n    direction: 'rtl'\n}).appendTo(t);\nt2 = $('<tr>').css({\n    color: '#EEE',\n    borderBottom: 'solid 2px #999',\n    fontWeight: 'bold'\n}).appendTo(t1);\n\n$('<td>').css({\n    padding:'10px',\n    width: '40%',\n    textAlign: 'right'\n}).html('سرور').appendTo(t2);\n    \n$('<td>').html('وضعیت').css({width:'60%'}).appendTo(t2);\n\n\nfor( i = 0; i < qs.length; i++ ){\n    //$('<div>').text( qs[i].id ).addClass('section-title').appendTo(t);\n    t1.append( getData(qs[i]) )\n}\n\nreturn ret[0].outerHTML;\n",
+						"height": 11
+					}
+				}
+			]
+		},
+		{
+			"title": "وضعیت صف",
+			"width": 1,
+			"row": {
+				"1": 49,
+				"2": 1,
+				"3": 35,
+				"4": 25,
+				"5": 25,
+				"6": 1,
+				"8": 1
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"6": 4,
+				"8": 4
+			},
+			"col_width": "5",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "var qs = datasources[\"queues\"];\n\nfunction getData(data){\n    var t,t1,t2,t3,t4;\n    var i,j;\n    var body = $('<div>');\n    if( data.error == true ){\n        t = $('<fieldset>').css({\n            margin: '5px',\n            display: 'inline-block',\n            borderRadius: '0',\n            lineHeight: '1.2',\n            verticalAlign: 'middle',\n            minWidth: '98px',\n            minHeight: '90px',\n            background: data.color,\n            direction: 'rtl',\n            textAlign: 'right',\n            border: 'none',\n            borderRadius: '12px'\n        }).appendTo(body);\n\n        t1 = $('<legend>').text(data.displayName).css({\n            color: '#EEE',\n            padding: '0 5px',\n            fontWeight: 'bold',\n            textAlign: 'center'\n        }).appendTo(t);\n\n\n        t2 = $('<div>').css({\n            paddingTop: '19px',\n            textAlign: 'center'\n        }).text('اشکال در سرور!').appendTo(t);\n        //$('<div>').text(data.response).appendTo(body);\n    }\n    else{\n        for( i = 0; i < data.response.length; i++ ){\n            t = $('<fieldset>').css({\n                margin: '5px',\n                display: 'inline-block',\n                borderRadius: '0',\n                lineHeight: '1.1',\n                verticalAlign: 'middle',\n                background: data.color,\n                minWidth: '98px',\n                direction: 'rtl',\n                textAlign: 'right',\n                border: 'none',\n                borderRadius: '12px'\n            }).appendTo(body);\n\n            t1 = $('<legend>').text(data.displayName + ': ' + data.response[i].number).css({\n                color: '#EEE',\n                padding: '0 5px',\n                fontWeight: 'bold',\n                textAlign: 'center'\n            }).appendTo(t);\n\n\n            t2 = $('<div>').css({paddingTop: '6px'}).appendTo(t);\n            $('<label>').html('<i class=\"icon-user icon-white\"></i>').css({\n                verticalAlign: 'super',\n                marginLeft: '13px'\n            }).appendTo(t2);\n            $('<b>').text( data.response[i].callsLength ).css({\n                color: '#8DE76A',\n                fontSize: '23pt',\n            \ttextShadow: '0 0 30px #8DE76A'\n            }).appendTo(t2);\n            \n            t2 = $('<div>').appendTo(t);\n            $('<label>').html('<i class=\"icon-headphones icon-white\"></i>').css({\n                verticalAlign: 'text-top',\n                marginLeft: '13px'\n            }).appendTo(t2);\n            t3 = [];\n            for( j = 0; j < data.response[i].members.length; j++ ){\n                if( t3.indexOf(data.response[i].members[j]) !== -1 ) continue;\n                t3.push(data.response[i].members[j]);\n            }\n            $('<b>').text( t3.length ).css({\n                color: '#F1A01B',\n                fontSize: '23pt',\n                textShadow: '0 0 30px #F1A01B'\n            }).appendTo(t2);\n        }   \n    }\n    return body.html();\n}\n\n\nvar i,j;\nvar t,t1,t2;\nvar ret = $('<div>').addClass('widget').css({direction: 'rtl', textAlign: 'right'});\nt = $('<div>').addClass('sub-section').appendTo(ret);\nfor( i = 0; i < qs.length; i++ ){\n    //$('<div>').text( qs[i].id ).addClass('section-title').appendTo(t);\n    t.append( getData(qs[i]) )\n}\n\nreturn ret[0].outerHTML;\n",
+						"height": 4
+					}
+				}
+			]
+		},
+		{
+			"title": "وضعیت عمومی",
+			"width": 1,
+			"row": {
+				"1": 25,
+				"2": 15,
+				"3": 45,
+				"4": 35,
+				"5": 1,
+				"6": 11,
+				"7": 15,
+				"8": 15,
+				"10": 15,
+				"11": 15
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 1,
+				"4": 1,
+				"5": 4,
+				"6": 5,
+				"7": 4,
+				"8": 4,
+				"10": 4,
+				"11": 4
+			},
+			"col_width": "2",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "var qs = datasources[\"resources\"];\nvar qs2 = datasources[\"omur\"]['$values'];\n\nfunction getData(data){\n    var t,t1,t2,t3,t4;\n    var i,j,f,g1,g2,g3;\n    var body = $('<tr>').css({\n        background: data.color  \n    });\n    $('<td>').css({\n        padding: '11px 10px',\n        color: '#EEE',\n        fontWeight: 'bold',\n    \ttextAlign: 'right'\n    }).html(data.displayName).appendTo(body);\n    if( data.error == true ){\n\t\t$('<td>').attr('colspan', '5').html('اشکال در سرور!').appendTo(body);\n    }\n    else{\n        t1 = $('<td>').css({\n            \n        }).appendTo(body);\n        $('<div>').css({\n            background: data.response.cpu.usage < 70 ? '#14EA0B': '#F33636',\n            borderRadius: '18px',\n            width: '18px',\n            height: '18px',\n            boxShadow: '0 0 30px '+ (data.response.cpu.usage < 70 ? '#14EA0B': '#F33636'),\n            display: 'inline-block'\n        }).appendTo(t1);\n\n        t1 = $('<td>').css({\n        }).appendTo(body);\n        $('<div>').css({\n            background: data.response.ram.usage < 98 ? '#14EA0B': '#F33636',\n            borderRadius: '18px',\n            width: '18px',\n            height: '18px',\n            boxShadow: '0 0 30px '+ (data.response.ram.usage < 98 ? '#14EA0B': '#F33636'),\n            display: 'inline-block'\n        }).appendTo(t1);\n        \n        t1 = $('<td>').appendTo(body);\n        f = false;\n        for( i = 0; i < data.response.disk.length; i++ ){\n            if( data.response.disk[i].mount == '/' ){\n                f = true;\n                $('<div>').css({\n                    background: data.response.disk[i].usage < 85 ? '#14EA0B': '#F33636',\n                    borderRadius: '18px',\n                    width: '18px',\n                    height: '18px',\n                    boxShadow: '0 0 30px '+ (data.response.disk[i].usage < 85 ? '#14EA0B': '#F33636'),\n            \t\tdisplay: 'inline-block'\n                }).appendTo(t1);\n            }\n        }\n        if( !f ){\n                $('<div>').css({\n                    background: '#CACACA',\n                    borderRadius: '18px',\n                    width: '18px',\n                    height: '18px',\n                    boxShadow: '0 0 30px #CACACA',\n            \t\tdisplay: 'inline-block'\n                }).appendTo(t1);\n        }\n\n        t1 = $('<td>').appendTo(body);\n        f = false;\n        for( i = 0; i < data.response.disk.length; i++ ){\n            if( data.response.disk[i].mount == '/mnt' ){\n                f = true;\n                $('<div>').css({\n                    background: data.response.disk[i].usage < 85 ? '#14EA0B': '#F33636',\n                    borderRadius: '18px',\n                    width: '18px',\n                    height: '18px',\n                    boxShadow: '0 0 30px '+ (data.response.disk[i].usage < 85 ? '#14EA0B': '#F33636'),\n            \t\tdisplay: 'inline-block'\n                }).appendTo(t1);\n            }\n        }\n        if( !f ){\n                $('<div>').css({\n                    background: '#CACACA',\n                    borderRadius: '18px',\n                    width: '18px',\n                    height: '18px',\n                    boxShadow: '0 0 30px #CACACA',\n            \t\tdisplay: 'inline-block'\n                }).appendTo(t1);\n        }\n        \n        \n        \n        f = false;\n        for( i = 0; i < qs2.length; i++ ){\n            if( qs2[i].Id == data.index ){\n                g1 = new Date(qs2[i].Lastobtaineddatetime);\n\t\t\t\tg1 = (g1.getTime()) -  ( ((3600*3) + (3600/2)) * 1000 );\n                g1 = parseInt( g1 / 1000 );\n                g2 = new Date();\n                g2 = parseInt( g2.getTime() / 1000 );\n                \n                if( g2 - g1 > (60 * 5) ){\n                    g3 = false;\n                }\n                else{\n                    g3 = true;\n                }\n                \n                \n                \n                t1 = $('<td>').appendTo(body);\n                $('<div>').css({\n                    background: g3 ? '#14EA0B': '#F33636',\n                    borderRadius: '18px',\n                    width: '18px',\n                    height: '18px',\n                    boxShadow: '0 0 30px '+ (g3 ? '#14EA0B': '#F33636'),\n            \t\tdisplay: 'inline-block'\n                }).appendTo(t1);\n                \n                f = true;\n                break;\n            }\n        }\n        if( !f ){\n            $('<td>').html('---').appendTo(body);\n        }\n        \n         \n    }\n    return body[0].outerHTML;\n}\n\n\nvar i,j;\nvar t,t1,t2;\nvar ret = $('<div>').addClass('widget');\nt = $('<div>').addClass('sub-section').appendTo(ret);\n\nt1 = $('<table>').css({\n    width: '100%',\n    textAlign: 'center',\n    direction: 'rtl'\n}).appendTo(t);\nt2 = $('<tr>').css({\n    color: '#EEE',\n    borderBottom: 'solid 2px #999',\n    fontWeight: 'bold'\n}).appendTo(t1);\n\n$('<td>').css({\n    padding:'10px',\n    width: '25%',\n    textAlign: 'right'\n}).html('سرور').appendTo(t2);\n$('<td>').html('پردازنده').css({width:'15%'}).appendTo(t2);\n$('<td>').html('حافظه').css({width:'15%'}).appendTo(t2);\n$('<td>').html('فضای سیستم').css({width:'15%', direction: 'ltr'}).appendTo(t2);\n$('<td>').html('فضای ضبط مکالمات').css({width:'15%', direction: 'ltr'}).appendTo(t2);\n$('<td>').html('تبادل داده خاموشی').css({width:'15%', direction: 'ltr'}).appendTo(t2);\n\nfor( i = 0; i < qs.length; i++ ){\n    //$('<div>').text( qs[i].id ).addClass('section-title').appendTo(t);\n    t1.append( getData(qs[i]) )\n}\n\nreturn ret[0].outerHTML;\n",
+						"height": 11
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "queues",
+			"type": "JSON",
+			"settings": {
+				"url": "http://10.226.64.10:9090/all/queue",
+				"use_thingproxy": true,
+				"refresh": 10,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "resources",
+			"type": "JSON",
+			"settings": {
+				"url": "http://10.226.64.10:9090/all/resources",
+				"use_thingproxy": true,
+				"refresh": 30,
+				"method": "GET",
+				"name": "resources"
+			}
+		},
+		{
+			"name": "e1",
+			"type": "JSON",
+			"settings": {
+				"url": "http://10.226.64.10:9090/all/e1",
+				"use_thingproxy": true,
+				"refresh": 30,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "omur",
+			"type": "JSON",
+			"settings": {
+				"url": "http://10.226.128.59:83/omur",
+				"use_thingproxy": false,
+				"refresh": 30,
+				"method": "GET",
+				"headers": [
+					{
+						"name": "Accept",
+						"value": "application/json"
+					}
+				]
+			}
+		}
+	],
+	"columns": 5
+}

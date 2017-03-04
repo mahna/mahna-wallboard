@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var request = require('request');
 var async = require('async');
-var config = require('../config.json');
+var config = require('../config/config.json');
 var app = express();
 // u shoud use asunc now
 app.use(cors());
@@ -16,6 +16,9 @@ app.get('/', function(req, res) {
     res.json(config.dataServers);
 });
 
+app.get('/wallboard.json', function(req, res) {
+    res.json( require('../config/wallboard.json') );
+});
 
 app.get('/:serverIds/:module', function(req, res) {
     var serverIds = req.params.serverIds.split(',');
