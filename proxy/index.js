@@ -80,7 +80,9 @@ app.get('/:serverIds/:module', function(req, res) {
             cb();
         });
     }, function(){
-        ret = ret.sort( function(a,b)( (a.index < b.index)? (-1): (a.index==b.index? 0: 1) ) );
+        ret = ret.sort( function(a,b){
+			return (a.index < b.index)? (-1): (a.index==b.index? 0: 1);
+		} );
         res.json(ret);
     });
 
