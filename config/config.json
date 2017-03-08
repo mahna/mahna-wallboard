@@ -11,5 +11,16 @@
 		{"index": 334077, "id":"Sorkhe","displayName":"سرخه","url":"http://10.226.76.143:6970","password":"qazwsx","color":"rgba(190,180,163,.1)"},
 		{"index": 178074, "id":"test-eyvanak","displayName":"ایوانکی","url":"http://10.226.73.15:6970","password":"qazwsx","color":"rgba(174,172,209,.1)"},
 		{"index": 178073, "id":"test-mayamei","displayName":"میامی","url":"http://10.226.74.143:6970","password":"qazwsx","color":"rgba(170,207,194,.1)"}
+	],
+	"pingServers": [
+		{"index": 66, "id":"semnan","displayName":"سمنان","ip":"10.226.64.15"},
+		{"index": 68, "id":"Bastam","displayName":"بسطام","ip":"10.226.72.15"},
+		{"index": 70, "id":"Damghan","displayName":"دامغان","ip":"10.226.71.15"},
+		{"index": 67, "id":"Garmsar","displayName":"گرمسار","ip":"10.226.69.15"},
+		{"index": 71, "id":"Mahdishahr","displayName":"مهدی‌شهر","ip":"10.226.75.15"},
+		{"index": 69, "id":"Shahroud","displayName":"شاهرود","ip":"10.226.67.15"},
+		{"index": 334077, "id":"Sorkhe","displayName":"سرخه","ip":"10.226.76.143"},
+		{"index": 178074, "id":"test-eyvanak","displayName":"ایوانکی","ip":"10.226.73.15"},
+		{"index": 178073, "id":"test-mayamei","displayName":"میامی","ip":"10.226.74.143"}
 	]
 }

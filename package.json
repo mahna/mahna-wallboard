@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-	"build": "grunt"
+    "build": "grunt"
   },
   "author": "nainemom <nainemom@gmail.com>",
   "license": "ISC",
@@ -15,7 +15,7 @@
     "grunt-contrib-cssmin": "0.6.1",
     "grunt-contrib-watch": "0.5.3",
     "grunt-contrib-uglify": "0.6.0",
-    "grunt-string-replace":  "^0.2.7"
+    "grunt-string-replace": "^0.2.7"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -23,6 +23,7 @@
     "colors": "^1.1.2",
     "cors-express": "^0.2.2",
     "express": "^4.14.0",
+    "ping": "^0.2.2",
     "request": "^2.76.0"
   },
   "repository": {
